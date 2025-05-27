@@ -1,4 +1,3 @@
-// pages/index.tsx
 import { useState, useEffect } from 'react';
 import { Todo } from '../types/todo';
 import TodoItem from '../components/TodoItem';
@@ -33,18 +32,16 @@ export default function Home() {
     setInput('');
   };
 
-  const markAsDone = (id: number) => {
-    const todo = todos.find(t => t.id === id);
-    if (!todo) return;
-    setTodos(todos.filter(t => t.id !== id));
-    setDoneTodos([{ ...todo, completed: true }, ...doneTodos]);
-  };
+  const toggleTodoStatus = (id: number) => {
+    const todoInTodo = todos.find(t => t.id === id);
+    const todoInDone = doneTodos.find(t => t.id === id);
 
-  const deleteTodo = (id: number, fromDone: boolean) => {
-    if (fromDone) {
-      setDoneTodos(doneTodos.filter(t => t.id !== id));
-    } else {
+    if (todoInTodo) {
       setTodos(todos.filter(t => t.id !== id));
+      setDoneTodos([{ ...todoInTodo, completed: true }, ...doneTodos]);
+    } else if (todoInDone) {
+      setDoneTodos(doneTodos.filter(t => t.id !== id));
+      setTodos([{ ...todoInDone, completed: false }, ...todos]);
     }
   };
 
@@ -75,36 +72,15 @@ export default function Home() {
         </button>
       </div>
 
-      <div className={styles.filterGroup}>
-        <button
-          onClick={() => setFilter('all')}
-          className={filter === 'all' ? styles.activeAll : styles.inactive}
-        >
-          전체
-        </button>
-        <button
-          onClick={() => setFilter('todo')}
-          className={filter === 'todo' ? styles.activeTodo : styles.inactive}
-        >
-          할 일
-        </button>
-        <button
-          onClick={() => setFilter('done')}
-          className={filter === 'done' ? styles.activeDone : styles.inactive}
-        >
-          완료됨
-        </button>
-      </div>
-
       <div className={styles.todoSections}>
         <section>
           <h2 className={styles.todoHeader}>TO DO</h2>
-          <ul className={styles.todoList}>
+          <ul className={styles.ul}>
             {todos.map(todo => (
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                onClick={() => markAsDone(todo.id)}
+                onClick={() => toggleTodoStatus(todo.id)}
               />
             ))}
           </ul>
@@ -112,13 +88,12 @@ export default function Home() {
 
         <section>
           <h2 className={styles.doneHeader}>DONE</h2>
-          <ul className={styles.todoList}>
+          <ul className={styles.ul}>
             {doneTodos.map(todo => (
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                onClick={() => {}}
-                onDelete={() => deleteTodo(todo.id, true)}
+                onClick={() => toggleTodoStatus(todo.id)}
                 isDone
               />
             ))}
