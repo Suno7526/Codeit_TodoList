@@ -14,9 +14,7 @@ export default function TodoItem({ todo, onClick, isDone = false }: Props) {
   const router = useRouter();
 
   const handleTextClick = () => {
-    if (isDone) {
       router.push(`/items?itemId=${todo.itemId}`);
-    }
   };
 
   return (

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Todo } from '../types/todo';
 import TodoItem from '../components/TodoItem';
 import styles from '../styles/index.module.css';
+import Image from 'next/image';
 
 export default function Home() {
   const [input, setInput] = useState('');
@@ -76,27 +77,45 @@ export default function Home() {
         <section>
           <h2 className={styles.todoHeader}>TO DO</h2>
           <ul className={styles.ul}>
-            {todos.map(todo => (
-              <TodoItem
-                key={todo.itemId}
-                todo={todo}
-                onClick={() => toggleTodoStatus(todo.itemId)}
-              />
-            ))}
+            {todos.length === 0 ? (
+              <div className="flex flex-col items-center gap-2">
+                <Image src="/use.png" alt="use" width={200} height={200} />
+                <p className="text-gray-600 text-center">
+                  할 일이 없어요.<br />TODO를 새롭게 추가해주세요!
+                </p>
+              </div>
+            ) : (
+              todos.map(todo => (
+                <TodoItem
+                  key={todo.itemId}
+                  todo={todo}
+                  onClick={() => toggleTodoStatus(todo.itemId)}
+                />
+              ))
+            )}
           </ul>
         </section>
 
         <section>
           <h2 className={styles.doneHeader}>DONE</h2>
           <ul className={styles.ul}>
-            {doneTodos.map(todo => (
-              <TodoItem
-                key={todo.itemId}
-                todo={todo}
-                onClick={() => toggleTodoStatus(todo.itemId)}
-                isDone
-              />
-            ))}
+            {doneTodos.length === 0 ? (
+              <div className="flex flex-col items-center gap-2">
+                <Image src="/notUse.png" alt="not use" width={500} height={500} />
+                <p className="text-gray-600 text-center">
+                  아직 다 한 일이 없어요.<br />해야 할 일을 체크해보세요!
+                </p>
+              </div>
+            ) : (
+              doneTodos.map(todo => (
+                <TodoItem
+                  key={todo.itemId}
+                  todo={todo}
+                  onClick={() => toggleTodoStatus(todo.itemId)}
+                  isDone
+                />
+              ))
+            )}
           </ul>
         </section>
       </div>

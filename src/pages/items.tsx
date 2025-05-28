@@ -17,15 +17,16 @@ export default function ItemDetail() {
         if (!router.isReady || !itemId) return;
 
         const storedDone = localStorage.getItem('doneTodos');
-        if (storedDone) {
-            const doneList: Todo[] = JSON.parse(storedDone);
-            const target = doneList.find((t) => t.itemId === Number(itemId));
-            if (target) {
-                setTodo(target);
-                setText(target.text);
-                setMemo((target as any).memo || '');
-                setImage((target as any).image || null);
-            }
+        const storedTodos = localStorage.getItem('todos');
+        const doneList: Todo[] = storedDone ? JSON.parse(storedDone) : [];
+        const todoList: Todo[] = storedTodos ? JSON.parse(storedTodos) : [];
+        const combined = [...doneList, ...todoList];
+        const target = combined.find((t) => t.itemId === Number(itemId));
+        if (target) {
+            setTodo(target);
+            setText(target.text);
+            setMemo((target as any).memo || '');
+            setImage((target as any).image || null);
         }
         setLoading(false);
     }, [router.isReady, itemId]);
@@ -73,7 +74,7 @@ export default function ItemDetail() {
     };
 
     if (loading) return <div className="p-4 text-center">로딩 중...</div>;
-    if (!todo) return <div className="p-4 text-center">해당 완료된 할 일을 찾을 수 없습니다.</div>;
+    if (!todo) return <div className="p-4 text-center">해당 할 일을 찾을 수 없습니다.</div>;
 
     return (
         <div className={styles.container}>
@@ -87,7 +88,7 @@ export default function ItemDetail() {
             <div className={`${styles.inputGroup} justify-between items-center w-full max-w-3xl mx-auto`}>
                 <div className={`w-full max-w-xl mx-auto mb-3 ${styles.todoUl} border-2 border-[#0f172a] transition duration-300`}
                      style={{ borderRadius: '3rem' }}>
-                    <div className="w-6 h-6 border-4 border-[#0f172a] rounded-full"></div>
+                    <div className={`w-6 h-6 border-4 rounded-full mr-4 ${todo.completed ? 'bg-purple-600 border-purple-600 text-white' : 'border-[#0f172a]'}`}></div>
                     <input
                         className="w-full bg-transparent text-lg font-semibold focus:outline-none"
                         value={text}
@@ -111,7 +112,12 @@ export default function ItemDetail() {
 
                 <div className="flex-1 bg-[#fffbea] rounded-2xl p-6 border border-yellow-200 shadow-inner">
                     <h3 className="text-[#d97706] font-bold mb-2">Memo</h3>
-                    <p className="whitespace-pre-wrap text-center text-gray-800">{memo}</p>
+                    <textarea
+                        className="w-full h-32 p-3 bg-transparent border-none resize-none text-center text-gray-800 overflow-y-auto focus:outline-none"
+                        placeholder="메모를 입력하세요"
+                        value={memo}
+                        onChange={(e) => setMemo(e.target.value)}
+                    />
                 </div>
             </div>
 
