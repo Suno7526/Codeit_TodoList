@@ -15,7 +15,7 @@ export default function TodoItem({ todo, onClick, isDone = false }: Props) {
 
   const handleTextClick = () => {
     if (isDone) {
-      router.push(`/items?id=${todo.id}`);
+      router.push(`/items?itemId=${todo.itemId}`);
     }
   };
 
@@ -42,7 +42,7 @@ export default function TodoItem({ todo, onClick, isDone = false }: Props) {
               className={`${isDone ? '' : ''} flex items-center cursor-pointer`}
               onClick={handleTextClick}
           >
-          {todo.text}{todo.id}
+          {todo.text}{todo.itemId}
         </span>
         </div>
       </li>

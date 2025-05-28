@@ -1,6 +1,6 @@
 // types/todo.ts
 export interface Todo {
-  id: number;
+  itemId: number;
   text: string;
   completed: boolean;
 }

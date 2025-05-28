@@ -24,7 +24,7 @@ export default function Home() {
   const addTodo = () => {
     if (!input.trim()) return;
     const newTodo: Todo = {
-      id: Date.now(),
+      itemId: Date.now(),
       text: input,
       completed: false,
     };
@@ -32,15 +32,15 @@ export default function Home() {
     setInput('');
   };
 
-  const toggleTodoStatus = (id: number) => {
-    const todoInTodo = todos.find(t => t.id === id);
-    const todoInDone = doneTodos.find(t => t.id === id);
+  const toggleTodoStatus = (itemId: number) => {
+    const todoInTodo = todos.find(t => t.itemId === itemId);
+    const todoInDone = doneTodos.find(t => t.itemId === itemId);
 
     if (todoInTodo) {
-      setTodos(todos.filter(t => t.id !== id));
+      setTodos(todos.filter(t => t.itemId !== itemId));
       setDoneTodos([{ ...todoInTodo, completed: true }, ...doneTodos]);
     } else if (todoInDone) {
-      setDoneTodos(doneTodos.filter(t => t.id !== id));
+      setDoneTodos(doneTodos.filter(t => t.itemId !== itemId));
       setTodos([{ ...todoInDone, completed: false }, ...todos]);
     }
   };
@@ -78,9 +78,9 @@ export default function Home() {
           <ul className={styles.ul}>
             {todos.map(todo => (
               <TodoItem
-                key={todo.id}
+                key={todo.itemId}
                 todo={todo}
-                onClick={() => toggleTodoStatus(todo.id)}
+                onClick={() => toggleTodoStatus(todo.itemId)}
               />
             ))}
           </ul>
@@ -91,9 +91,9 @@ export default function Home() {
           <ul className={styles.ul}>
             {doneTodos.map(todo => (
               <TodoItem
-                key={todo.id}
+                key={todo.itemId}
                 todo={todo}
-                onClick={() => toggleTodoStatus(todo.id)}
+                onClick={() => toggleTodoStatus(todo.itemId)}
                 isDone
               />
             ))}

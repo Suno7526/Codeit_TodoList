@@ -5,7 +5,7 @@ import styles from "@/styles/index.module.css";
 
 export default function ItemDetail() {
     const router = useRouter();
-    const { id } = router.query;
+    const { itemId } = router.query;
 
     const [todo, setTodo] = useState<Todo | null>(null);
     const [loading, setLoading] = useState(true);
@@ -14,12 +14,12 @@ export default function ItemDetail() {
     const [text, setText] = useState('');
 
     useEffect(() => {
-        if (!router.isReady || !id) return;
+        if (!router.isReady || !itemId) return;
 
         const storedDone = localStorage.getItem('doneTodos');
         if (storedDone) {
             const doneList: Todo[] = JSON.parse(storedDone);
-            const target = doneList.find((t) => t.id === Number(id));
+            const target = doneList.find((t) => t.itemId === Number(itemId));
             if (target) {
                 setTodo(target);
                 setText(target.text);
@@ -28,7 +28,7 @@ export default function ItemDetail() {
             }
         }
         setLoading(false);
-    }, [router.isReady, id]);
+    }, [router.isReady, itemId]);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -55,7 +55,7 @@ export default function ItemDetail() {
 
         const doneList: Todo[] = JSON.parse(storedDone);
         const updatedList = doneList.map((t) =>
-            t.id === todo.id ? { ...t, text, memo, image } : t
+            t.itemId === todo.itemId ? { ...t, text, memo, image } : t
         );
         localStorage.setItem('doneTodos', JSON.stringify(updatedList));
         router.push('/');
@@ -67,7 +67,7 @@ export default function ItemDetail() {
         if (!storedDone) return;
 
         const doneList: Todo[] = JSON.parse(storedDone);
-        const updatedList = doneList.filter((t) => t.id !== todo.id);
+        const updatedList = doneList.filter((t) => t.itemId !== todo.itemId);
         localStorage.setItem('doneTodos', JSON.stringify(updatedList));
         router.push('/');
     };
