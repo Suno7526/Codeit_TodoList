@@ -4,6 +4,7 @@ import { Todo } from '../types/todo';
 import styles from "@/styles/index.module.css";
 import { Check } from 'lucide-react';
 import Header from '../components/Header';
+import Image from 'next/image';
 
 export default function ItemDetail() {
     const router = useRouter();
@@ -120,7 +121,7 @@ export default function ItemDetail() {
         <div className={styles.container}>
             <Header />
 
-            <div className="w-full max-w-7xl mx-auto">
+            <div className="w-full max-w-5xl mx-auto">
                 <div
                     className={`w-full mx-auto mb-3 ${styles.todoUl} border-2 border-[#0f172a] transition duration-300`}
                     style={{ borderRadius: '3rem' }}
@@ -163,7 +164,7 @@ export default function ItemDetail() {
                         </>
                       ) : (
                         <label className="cursor-pointer flex flex-col items-center">
-                          <div className="text-gray-400 text-4xl">🖼</div>
+                          <div className="text-gray-400 text-4xl"><Image src="/galary.png" alt="use" width={70} height={70} /></div>
                           <input
                             type="file"
                             accept="image/*"
