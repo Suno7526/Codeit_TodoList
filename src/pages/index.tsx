@@ -79,7 +79,7 @@ export default function Home() {
           <ul className={styles.ul}>
             {todos.length === 0 ? (
               <div className="flex flex-col items-center gap-2">
-                <Image src="/use.png" alt="use" width={200} height={200} />
+                <Image src="/use.png" alt="use" width={500} height={500} />
                 <p className="text-gray-600 text-center">
                   할 일이 없어요.<br />TODO를 새롭게 추가해주세요!
                 </p>
