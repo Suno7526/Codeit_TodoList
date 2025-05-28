@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Todo } from '../types/todo';
 import styles from "@/styles/index.module.css";
+import { Check } from 'lucide-react';
+import Header from '../components/Header';
 
 export default function ItemDetail() {
     const router = useRouter();
@@ -116,12 +118,7 @@ export default function ItemDetail() {
 
     return (
         <div className={styles.container}>
-            <header className={styles.header}>
-                <div className={styles.logo}>
-                    <span className={styles.eyes}>👀</span>
-                    do it<span className={styles.semicolon}>;</span>
-                </div>
-            </header>
+            <Header />
 
             <div className="w-full max-w-7xl mx-auto">
                 <div
@@ -129,9 +126,15 @@ export default function ItemDetail() {
                     style={{ borderRadius: '3rem' }}
                 >
                     <div
-                        className={`w-6 h-6 border-4 rounded-full mr-4 cursor-pointer ${todo.completed ? 'bg-purple-600 border-purple-600' : 'border-[#0f172a]'}`}
-                        onClick={handleToggleComplete}
-                    />
+                      className={`${styles.circleCheck} ${todo.completed ? styles.checked : ''} cursor-pointer`}
+                      onClick={handleToggleComplete}
+                    >
+                      <Check
+                        size={16}
+                        strokeWidth={3}
+                        style={{ opacity: todo.completed ? 1 : 0 }}
+                      />
+                    </div>
                     <input
                         className="w-full bg-transparent text-lg font-semibold focus:outline-none"
                         value={text}

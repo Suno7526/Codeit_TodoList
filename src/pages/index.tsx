@@ -3,6 +3,7 @@ import { Todo } from '../types/todo';
 import TodoItem from '../components/TodoItem';
 import styles from '../styles/index.module.css';
 import Image from 'next/image';
+import Header from '../components/Header';
 
 export default function Home() {
   const [input, setInput] = useState('');
@@ -51,12 +52,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <span className={styles.eyes}>👀</span>
-          do it<span className={styles.semicolon}>;</span>
-        </div>
-      </header>
+      <Header />
 
       <div className={styles.inputGroup}>
         <input
