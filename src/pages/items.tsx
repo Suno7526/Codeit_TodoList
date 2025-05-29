@@ -138,48 +138,36 @@ export default function ItemDetail() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-6 mt-8 w-full">
-          <div className="w-full md:w-[40%] h-[25rem] relative flex items-center justify-center bg-[#f8fafc] border-2 border-dashed border-[#d1d5db] rounded-2xl overflow-hidden">
-            {image ? (
-              <>
-                <img src={image} alt="첨부 이미지" className="w-full h-full object-cover" />
-                <label className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center bg-white border border-gray-400 rounded-full text-xl cursor-pointer shadow">
-                  <Image src="/editButton.png" alt="use" width={70} height={70} />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
+        <div className="flex flex-col lg:flex-row gap-6 mt-8 w-full">
+          <div className="w-full lg:w-[40%] h-[25rem] flex items-center justify-center bg-[#f8fafc] border-2 border-dashed border-[#d1d5db] rounded-2xl relative">
+              {image ? (
+                <>
+                  <img src={image} alt="첨부 이미지" className="w-full h-full object-cover" />
+                  <label className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center bg-white border border-gray-400 rounded-full text-xl cursor-pointer shadow">
+                    <Image src="/editButton.png" alt="edit" width={70} height={70} />
+                    <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+                  </label>
+                </>
+              ) : (
+                <label className="cursor-pointer flex flex-col items-center justify-center w-full h-full">
+                  <Image src="/galary.png" alt="gallery" width={70} height={70} />
+                  <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+                  <div className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full text-xl">＋</div>
                 </label>
-              </>
-            ) : (
-              <label className="cursor-pointer flex flex-col items-center">
-                <div className="text-gray-400 text-4xl">
-                  <Image src="/galary.png" alt="use" width={70} height={70} />
-                </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                />
-                <div className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full text-xl">＋</div>
-              </label>
-            )}
-          </div>
-
-          <div className="w-full md:w-[70%] bg-[#fffbea] rounded-2xl p-6 border border-yellow-200 shadow-inner flex flex-col items-center justify-center">
-            <h3 className="text-[#d97706] font-bold mb-2">Memo</h3>
-            <div className="w-full h-80 flex items-center justify-center">
-              <textarea
-                className="w-full h-full p-3 bg-transparent border-none resize-none text-center text-gray-800 focus:outline-none"
-                placeholder="메모를 입력하세요"
-                value={memo}
-                onChange={(e) => setMemo(e.target.value)}
-              />
+              )}
             </div>
-          </div>
+
+          <div className="w-full lg:w-[60%] bg-[#fffbea] rounded-2xl p-6 border border-yellow-200 shadow-inner flex flex-col items-center justify-center">
+              <h3 className="text-[#d97706] font-bold mb-2">Memo</h3>
+              <div className="w-full h-80 flex items-center justify-center">
+                <textarea
+                  className="w-full h-full p-3 bg-transparent border-none resize-none text-center text-gray-800 focus:outline-none"
+                  placeholder="메모를 입력하세요"
+                  value={memo}
+                  onChange={(e) => setMemo(e.target.value)}
+                />
+              </div>
+            </div>
         </div>
 
         <div className="flex justify-end gap-4 mt-8">
