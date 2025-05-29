@@ -19,12 +19,12 @@ export default function TodoItem({ todo, onClick, isDone = false }: Props) {
 
   return (
       <li
-          className={`w-full max-w-xl mx-auto mb-3 ${styles.todoUl} ${
-              isDone ? 'bg-[#e9d8fd]' : 'bg-white hover:bg-gray-100'
+          className={`flex items-center w-full max-w-xl mx-auto mb-3 max-w-full h-12 ${
+              isDone ? 'bg-[#e9d8fd] line-through' : 'bg-white hover:bg-gray-100'
           } border-2 border-[#0f172a] transition duration-300`}
           style={{ borderRadius: '3rem' }}
       >
-        <div className="flex items-center justify-start">
+        <div className={`flex items-center justify-start ml-4`}>
           <div
               className={`${styles.circleCheck} ${isDone ? styles.checked : ''}`}
               onClick={onClick}
@@ -37,10 +37,10 @@ export default function TodoItem({ todo, onClick, isDone = false }: Props) {
           </div>
 
           <span
-              className={`${isDone ? '' : ''} flex items-center cursor-pointer`}
+              className={`${isDone ? '' : ''}  flex items-center cursor-pointer ml-2`}
               onClick={handleTextClick}
           >
-          {todo.text}{todo.itemId}
+          {todo.text}
         </span>
         </div>
       </li>

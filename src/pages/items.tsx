@@ -114,9 +114,9 @@ export default function ItemDetail() {
 
       <div className="w-full max-w-5xl mx-auto">
         <div
-          className={`flex items-center w-full mx-auto mb-3 border-2 h-10 ${
-            completed ? 'bg-violet-300' : ''
-          } border-[#0f172a] transition duration-300`}
+          className={`flex items-center w-full mx-auto mb-3 border-2 h-10
+            ${completed ? 'bg-violet-300 underline' : ''}
+           border-[#0f172a] transition duration-300`}
           style={{ borderRadius: '3rem' }}
         >
           <div className="flex items-center justify-center w-full gap-4">
