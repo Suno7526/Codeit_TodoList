@@ -31,8 +31,8 @@ export default function ItemDetail() {
       setTodo(target);
       setOriginalTodo(target);
       setText(target.text);
-      setMemo((target as any).memo || '');
-      setImage((target as any).image || null);
+      setMemo(target.memo || '');
+      setImage(target.image || null);
       setCompleted(target.completed);
     }
     setLoading(false);

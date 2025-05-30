@@ -9,7 +9,6 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
   const [doneTodos, setDoneTodos] = useState<Todo[]>([]);
-  const [filter, setFilter] = useState<'all' | 'todo' | 'done'>('all');
 
   useEffect(() => {
     const storedTodos = localStorage.getItem('todos');
@@ -47,8 +46,6 @@ export default function Home() {
     }
   };
 
-  const filteredTodos =
-    filter === 'todo' ? todos : filter === 'done' ? doneTodos : todos;
 
   return (
     <div className={styles.container}>
